@@ -1,0 +1,88 @@
+:root {
+    --primary-color: #1a1a2e;
+    --accent-color: #e94560;
+    --text-color: #ffffff;
+    --secondary-text-color: #99a2ad;
+    --card-background: #252a42;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
+
+.error-container {
+    background-color: var(--card-background);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.error-container:hover {
+    transform: translateY(-5px);
+}
+
+.error-code {
+    font-size: 150px;
+    font-weight: 900;
+    color: var(--accent-color);
+    margin: 0;
+    line-height: 1;
+    text-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+}
+
+.error-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 15px 0 10px 0;
+    color: var(--text-color);
+}
+
+.error-message {
+    font-size: 16px;
+    color: var(--secondary-text-color);
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.home-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 4px 10px rgba(233, 69, 96, 0.3);
+}
+
+.home-button:hover {
+    background-color: #d8314e;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .error-code {
+        font-size: 100px;
+    }
+
+    .error-title {
+        font-size: 22px;
+    }
+
+    .error-container {
+        padding: 30px;
+    }
+}
