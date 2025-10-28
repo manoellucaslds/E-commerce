@@ -3,7 +3,7 @@
         <ul class="">
             <li><a href="<?php echo RELATIVE_PATH?>/dashboard/cadastro/produto">Cadastro Produto</a></li>
             <li><a href="<?php echo RELATIVE_PATH?>/dashboard/cadastro/cliente">Cadastro Cliente</a></li>
-            <li><a href=""></a></li>
+            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/cadastro/colaborador">Cadastro Funcionario</a></li>
         </ul>
     </header>
     

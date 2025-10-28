@@ -1,3 +1,6 @@
+<?php 
+    $url = isset($_GET["url"])? explode("/", $_GET["url"])[1] : "";
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -16,19 +19,19 @@
         <div class="logo">TECH<span>NEON</span></div>
 
         <ul class="nav-menu">
-            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/painel" class="active"><span>📊</span> Painel</a></li>
-            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/cadastro"><span>📝</span> Cadastro</a></li>
-            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/relatorio"><span>📈</span> Relatório</a></li>
-            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/vendas"><span>💰</span> Vendas</a></li>
-            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/pedido"><span>📦</span> Pedido</a></li>
-            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/orcamento"><span>📑</span> Orçamentos</a></li>
+            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/painel" <?php echo ($url=="painel" ||$url=="")?'class="active"':""?>> <span>📊</span> Painel</a></li>
+            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/cadastro" <?php echo ($url=="cadastro")?'class="active"':""?>><span>📝</span> Cadastro</a></li>
+            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/relatorio" <?php echo ($url=="relatorio")?'class="active"':""?>><span>📈</span> Relatório</a></li>
+            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/vendas" <?php echo ($url=="vendas")?'class="active"':""?>><span>💰</span> Vendas</a></li>
+            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/pedido" <?php echo ($url=="pedido")?'class="active"':""?>><span>📦</span> Pedido</a></li>
+            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/orcamento" <?php echo ($url=="orcamento")?'class="active"':""?>><span>📑</span> Orçamentos</a></li>
             <li><a href=""><span>🚪</span> Sair</a></li>
         </ul>
     </aside>
 
     <main class="main-content">
         <?php
-        $url = isset($_GET["url"])? explode("/", $_GET["url"])[1] : "";
+        
 
         if ($url == "" || $url == "painel") {
             require_once ROOT_PATH . "/app/views/dashboardPages/PainelView.php";
