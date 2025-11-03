@@ -1,5 +1,6 @@
 <?php 
-    $url = isset($_GET["url"])? explode("/", $_GET["url"])[1] : "";
+
+    $url = isset(explode("/", $_GET["url"])[1])? explode("/", $_GET["url"])[1] : "";
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

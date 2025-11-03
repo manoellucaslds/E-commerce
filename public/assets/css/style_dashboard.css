@@ -1,4 +1,3 @@
-
 :root {
     --primary-color: #1a1a2e;
     --accent-color: #e94560;
@@ -15,7 +14,7 @@
     --gray-inactive: #607d8b;
 }
 
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -365,6 +364,7 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 20px;
 }
+
 /*------------------------ cadastro cliente ----------------------------*/
 
 /*------------------------ Relatorio de produtos -----------------------*/
@@ -507,6 +507,7 @@ body {
     color: var(--accent-color);
     font-weight: 700;
 }
+
 /*------------------------ Relatorio de produtos -----------------------*/
 
 
@@ -565,6 +566,7 @@ body {
     color: var(--accent-color);
     font-weight: 700;
 }
+
 /*---------------------- relatorio de clientes ----------------------*/
 
 
@@ -623,8 +625,324 @@ body {
     color: var(--blue-highlight);
     font-weight: 700;
 }
+
 /*----------------- relatorio de colaborador* --------------/
 
+/*----------------- Pedidos --------------*/
+/*Novo Pedido*/
+/* Tabela de Produtos */
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.products-table th,
+.products-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.products-table th {
+    color: var(--secondary-text-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    background-color: #2c324b;
+}
+
+.products-table tbody tr:hover {
+    background-color: #313853;
+}
+
+.products-table td:last-child {
+    text-align: center;
+}
+
+.remove-btn {
+    background-color: transparent;
+    border: none;
+    color: var(--accent-color);
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.remove-btn:hover {
+    color: #ff7f96;
+}
+
+/* Totais */
+.container .card .totals-summary {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(77, 208, 225, 0.2);
+    font-size: 18px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.container .card .totals-summary div {
+    margin-bottom: 5px;
+}
+
+.container .card .totals-summary span {
+    display: inline-block;
+    min-width: 120px;
+    text-align: right;
+    color: var(--blue-highlight);
+}
+
+.total-final span {
+    color: var(--accent-color);
+    font-size: 24px;
+}
+
+/* Seção de Adicionar Produto */
+.product-add-section {
+    background-color: #1e2439;
+    /* Fundo ligeiramente diferente */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(77, 208, 225, 0.1);
+}
+
+.product-add-section .form-row {
+    align-items: flex-end;
+}
+
+/* Botões */
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.btn-confirm {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    box-shadow: 0 3px 10px rgba(233, 69, 96, 0.4);
+}
+
+.btn-confirm:hover {
+    background-color: #d8314e;
+    transform: translateY(-1px);
+}
+
+.btn-cancel {
+    background-color: var(--secondary-text-color);
+    color: var(--card-background);
+}
+
+.btn-cancel:hover {
+    background-color: #7d848e;
+    transform: translateY(-1px);
+}
+
+.btn-add-product {
+    background-color: var(--blue-highlight);
+    color: var(--card-background);
+    box-shadow: 0 3px 10px rgba(77, 208, 225, 0.4);
+    flex-shrink: 0;
+    height: 44px;
+    /* Alinha com os inputs */
+    display: flex;
+    align-items: center;
+}
+
+.btn-add-product:hover {
+    background-color: #31c4d8;
+}
+
+.action-buttons-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Tabela de Produtos */
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.products-table th,
+.products-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.products-table th {
+    color: var(--secondary-text-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    background-color: #2c324b;
+}
+
+.products-table tbody tr:hover {
+    background-color: #313853;
+}
+
+.products-table td:last-child {
+    text-align: center;
+}
+
+.remove-btn {
+    background-color: transparent;
+    border: none;
+    color: var(--accent-color);
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.remove-btn:hover {
+    color: #ff7f96;
+}
+
+
+/*Atualizar pedido*/
+/* Área de Filtros/Ações */
+.filter-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.filter-group {
+    display: flex;
+    gap: 10px;
+    flex-grow: 1;
+    max-width: 600px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    flex-grow: 1;
+}
+
+input[type="text"]:focus {
+    border-color: var(--blue-highlight);
+    box-shadow: 0 0 8px rgba(77, 208, 225, 0.5);
+    outline: none;
+}
+
+.btn-new {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: var(--blue-highlight);
+    color: var(--card-background);
+    box-shadow: 0 3px 10px rgba(77, 208, 225, 0.4);
+    flex-shrink: 0;
+}
+
+.btn-new:hover {
+    background-color: #31c4d8;
+}
+
+/* Estilo da Tabela */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.data-table th {
+    color: var(--secondary-text-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    background-color: #2c324b;
+}
+
+.data-table tbody tr:hover {
+    background-color: #313853;
+}
+
+/* Destaque de Status/Valor */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.status-pending {
+    background-color: rgba(255, 193, 7, 0.2);
+    /* Amarelo translúcido */
+    color: #ffc107;
+    /* Amarelo */
+}
+
+.total-value {
+    font-weight: 700;
+    color: var(--green-success);
+}
+
+/* Botões de Ação na Tabela */
+.action-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin: 0 5px;
+}
+
+.btn-confirm {
+    background-color: var(--green-success);
+    color: var(--primary-color);
+}
+
+.btn-confirm:hover {
+    background-color: #4cd39b;
+}
+
+.btn-cancel {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+
+.btn-cancel:hover {
+    background-color: #d8314e;
+}
+
+/*----------------- Pedidos --------------*/
 
 /* ------------------ Error Page ------------------ */
 .error-container {
@@ -682,6 +1000,7 @@ body {
     background-color: #d8314e;
     transform: translateY(-2px);
 }
+
 /* ------------------ Error Page ------------------ */
 
 
@@ -767,7 +1086,7 @@ body {
 
     .report-header {
         flex-direction: column;
-        
+
     }
 
     .report-title {
@@ -804,7 +1123,7 @@ body {
 
     .product-table tr,
     .client-table tr,
-    .staff-table tr  {
+    .staff-table tr {
         margin-bottom: 15px;
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 8px;
