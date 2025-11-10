@@ -11,12 +11,18 @@
 <body>
 
     <div class="login-card">
+        <?php
+            if(isset($_SESSION["erro"])){
+                echo "erro ao fazer login";
+            }
+
+        ?>
         <h1 class="login-title">Acesso <span>TechNeon</span></h1>
         
-        <form>            
+        <form method="POST" action="<?php echo RELATIVE_PATH;?>/dashboard/login">            
             <div class="form-group">
                 <label for="email">E-mail ou Usuário</label>
-                <input type="text" id="email" name="email" placeholder="Digite seu e-mail ou usuário" required>
+                <input type="text" id="email" name="username" placeholder="Digite seu e-mail ou usuário" required>
             </div>
             
             <div class="form-group">
@@ -24,15 +30,10 @@
                 <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
             </div>
             
-            <button type="submit" class="login-button">
+            <button type="submit" class="login-button" name="login">
                 ENTRAR
             </button>
         </form>
-
-        <div class="additional-links">
-            <a href="#">Esqueceu a senha?</a> | 
-            <a href="#">Criar conta</a>
-        </div>
     </div>
 
 </body>

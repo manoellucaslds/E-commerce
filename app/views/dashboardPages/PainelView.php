@@ -15,12 +15,12 @@
 
         <div class="info-card">
             <p class="card-title">Novos Pedidos</p>
-            <p class="card-value card-value-blue">12</p>
+            <p class="card-value card-value-accent">12</p>
         </div>
 
         <div class="info-card">
-            <p class="card-title">Orçamentos Pendentes</p>
-            <p class="card-value">5</p>
+            <p class="card-title">Pedidos Pendentes</p>
+            <p class="card-value card-value-accent">5</p>
         </div>
 
         <div class="info-card">

@@ -25,8 +25,8 @@
             <li><a href="<?php echo RELATIVE_PATH?>/dashboard/relatorio" <?php echo ($url=="relatorio")?'class="active"':""?>><span>📈</span> Relatório</a></li>
             <li><a href="<?php echo RELATIVE_PATH?>/dashboard/vendas" <?php echo ($url=="vendas")?'class="active"':""?>><span>💰</span> Vendas</a></li>
             <li><a href="<?php echo RELATIVE_PATH?>/dashboard/pedido" <?php echo ($url=="pedido")?'class="active"':""?>><span>📦</span> Pedido</a></li>
-            <li><a href="<?php echo RELATIVE_PATH?>/dashboard/orcamento" <?php echo ($url=="orcamento")?'class="active"':""?>><span>📑</span> Orçamentos</a></li>
-            <li><a href=""><span>🚪</span> Sair</a></li>
+           
+            <li><a href="<?php echo RELATIVE_PATH;?>/dashboard/logout/"><span>🚪</span> Sair</a></li>
         </ul>
     </aside>
 

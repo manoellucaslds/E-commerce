@@ -1,5 +1,5 @@
 <div class="container">
-        <h1>Pedidos de Venda Pendentes</h1>
+        <h1 style="text-align: center; margin-bottom: 25px;" class="report-title">Pedidos de Venda Pendentes</h1>
 
         <div class="card">
             <div class="filter-section">

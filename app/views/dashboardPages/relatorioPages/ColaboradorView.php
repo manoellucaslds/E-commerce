@@ -2,7 +2,7 @@
         
         <div class="report-header">
             <h1 class="report-title">Relatório de Colaboradores</h1>
-            <a href="#" class="action-button">➕ Novo Colaborador</a>
+            <a href="#" class="action-button">Buscar</a>
         </div>
         
         <!-- Área de Filtros -->

@@ -1,35 +1,34 @@
-<div class="container">
-        
+<div style="width:100%; height: 100%;">
+    <div class="container">
+
         <div class="report-header">
-            <h1 class="report-title">Relatório de Clientes</h1>
+            <h1 class="report-title">Vendas</h1>
             <a href="#" class="action-button">Buscar</a>
         </div>
-        
+
         <!-- Área de Filtros -->
         <div class="filters">
             <div class="filter-group">
-                <label for="search-name">Buscar por Nome / Documento</label>
-                <input type="text" id="search-name" placeholder="Nome ou CPF/CNPJ...">
+                <label for="">Data Inicial</label>
+                <input type="date" name="" id="">
+                <label for="">Data Final</label>
+                <input type="date" name="" id="">
+
             </div>
-            
+
             <div class="filter-group">
-                <label for="status">Status do Cliente</label>
+                <label for="status">Status do Compras</label>
                 <select id="status">
                     <option value="">Todos</option>
-                    <option value="active">Ativo</option>
-                    <option value="inactive">Inativo</option>
-                    <option value="lead">Lead</option>
+                    <option value="active">Cancelado</option>
+                    <option value="inactive">Conluido</option>
+                    <option value="lead">Pendente</option>
                 </select>
             </div>
 
             <div class="filter-group" style="max-width: 200px;">
-                <label for="city">Filtrar por Cidade</label>
-                <select id="city">
-                    <option value="">Todas</option>
-                    <option value="sp">São Paulo</option>
-                    <option value="rj">Rio de Janeiro</option>
-                    <option value="mg">Minas Gerais</option>
-                </select>
+                <label for="city">Cupom</label>
+                <input type="text">
             </div>
         </div>
 
@@ -38,13 +37,12 @@
             <table class="client-table">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Cupom</th>
                         <th>Nome do Cliente</th>
                         <th>Documento (CPF/CNPJ)</th>
                         <th>Total Comprado (R$)</th>
-                        <th>Última Compra</th>
+                        <th>Data Compra</th>
                         <th>Status</th>
-                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,7 +54,8 @@
                         <td data-label="Total Comprado"><span class="purchase-value">18.500,00</span></td>
                         <td data-label="Última Compra">25/10/2025</td>
                         <td data-label="Status"><span class="status-badge active">Ativo</span></td>
-                        <td data-label="Ações"><a href="#" style="color: var(--purple-highlight); text-decoration: none;">Detalhes</a></td>
+                        <td data-label="Ações"><button href="#"
+                                style="color: var(--purple-highlight); text-decoration: none;">Consultar</button></td>
                     </tr>
                     <!-- Exemplo 2: Cliente Lead (Potencial) -->
                     <tr>
@@ -66,7 +65,8 @@
                         <td data-label="Total Comprado"><span class="purchase-value">0,00</span></td>
                         <td data-label="Última Compra">--</td>
                         <td data-label="Status"><span class="status-badge lead">Lead</span></td>
-                        <td data-label="Ações"><a href="#" style="color: var(--purple-highlight); text-decoration: none;">Detalhes</a></td>
+                        <td data-label="Ações"><button href="#"
+                                style="color: var(--purple-highlight); text-decoration: none;">Consultar</button></td>
                     </tr>
                     <!-- Exemplo 3: Cliente Inativo (Compra Recente Baixa) -->
                     <tr>
@@ -76,7 +76,8 @@
                         <td data-label="Total Comprado"><span class="purchase-value">950,00</span></td>
                         <td data-label="Última Compra">01/08/2024</td>
                         <td data-label="Status"><span class="status-badge inactive">Inativo</span></td>
-                        <td data-label="Ações"><a href="#" style="color: var(--purple-highlight); text-decoration: none;">Detalhes</a></td>
+                        <td data-label="Ações"><button href="#"
+                                style="color: var(--purple-highlight); text-decoration: none;">Consultar</button></td>
                     </tr>
                     <!-- Exemplo 4: Cliente Ativo com Valor Médio -->
                     <tr>
@@ -86,10 +87,14 @@
                         <td data-label="Total Comprado"><span class="purchase-value">4.200,00</span></td>
                         <td data-label="Última Compra">10/09/2025</td>
                         <td data-label="Status"><span class="status-badge active">Ativo</span></td>
-                        <td data-label="Ações"><a href="#" style="color: var(--purple-highlight); text-decoration: none;">Detalhes</a></td>
+                        <td data-label="Ações"><button href="#"
+                                style="color: var(--purple-highlight); text-decoration: none;">Consultar</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
     </div>
+
+
+</div>
