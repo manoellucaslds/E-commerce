@@ -1,6 +1,6 @@
 <div class="form-card" style="margin: 0 auto">
     <h1 class="form-title">Cadastrar Novo <span>Produto</span></h1>
-    <form>
+    <form method="POST" action="<?php echo RELATIVE_PATH;?>/dashboard/cadastroProduto" enctype="multipart/form-data">
         <div class="form-group">
             <label for="nome">Nome do Produto</label>
             <input type="text" id="nome" name="nome" placeholder="Ex: Headset Imersivo X-9" required>

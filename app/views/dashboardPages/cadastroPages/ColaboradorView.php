@@ -1,7 +1,7 @@
 <div class="form-card">
     <h1 class="form-title">Cadastro de <span>Colaborador</span></h1>
 
-    <form>
+    <form method="POST" action="<?php echo RELATIVE_PATH?>/dashboard/cadastroFuncionario">
 
         <!-- Dados Pessoais e Contato -->
         <div class="form-row">

@@ -8,6 +8,11 @@
     </header>
     
     <?php
+        if(isset($_SESSION["erro"])) {
+            echo $_SESSION["erro"];
+        }else if(isset($_SESSION["feedback"])){
+            echo $_SESSION["feedback"];
+        }
         $url = isset($_GET["url"])?explode("cadastro", $_GET["url"])[1] : "";
         if ($url == "" || explode("/",$url)[1] == "produto") {
             require_once ROOT_PATH . "/app/views/dashboardPages/cadastroPages/ProdutoView.php";

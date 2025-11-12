@@ -1,7 +1,7 @@
 <div class="form-card">
         <h1 class="form-title">Cadastro de Cliente <span>/ Empresa</span></h1>
         
-        <form >
+        <form method="POST" action="<?php echo RELATIVE_PATH."/dashboard"?>/cadastroCliente">
             
             <!-- Tipo de Pessoa/Empresa -->
             <div class="form-row">
@@ -10,8 +10,8 @@
                     <input type="text" id="nome" name="nome" placeholder="Nome do Cliente">
                 </div>
                 <div class="form-group">
-                    <label for="razao_social">Razão Social (Opcional)</label>
-                    <input type="text" id="razao_social" name="razao_social" placeholder="Razão Social da Empresa">
+                    <label for="razao_social">Telefone (Contato)</label>
+                    <input type="text" id="telefone" name="telefone" placeholder="( 91 ) 9 9999 - 9999">
                 </div>
             </div>
 
@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <label for="rg_ie">RG / Inscrição Estadual (IE)</label>
-                    <input type="text" id="rg_ie" name="rg_ie" placeholder="Identidade ou Inscrição Estadual">
+                    <input type="text" id="rg_ie" name="rg_incricaoEstadual" placeholder="Identidade ou Inscrição Estadual">
                 </div>
                 <div class="form-group">
                     <label for="nascimento">Nascimento</label>
@@ -65,7 +65,7 @@
                 </div>
             </div>
             
-            <button type="submit" class="submit-button">
+            <button type="submit" class="submit-button" name="cadastro_cliente">
                 FINALIZAR CADASTRO
             </button>
         </form>
