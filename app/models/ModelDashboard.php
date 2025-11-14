@@ -76,7 +76,7 @@ class ModelDashboard
     }
     public static function cadastrarFuncionario($data)
     {
-        $sql = Mysql::connect()->prepare("INSERT INTO `tb.funcionarios` values(?,?,?,?,?,?,?,?)");
+        $sql = Mysql::connect()->prepare("INSERT INTO `tb.funcionarios` values(?,?,?,?,?,?,?,?,?)");
         if ($sql->execute($data)) {
             return true;
         } else {
@@ -97,15 +97,20 @@ class ModelDashboard
             $where_clauses[] = "nome LIKE ?";
             $params[] = "%" . $data[0] . "%";
         }
-
+        
         if (!empty($data[1])) {
             $where_clauses[] = "categoria LIKE ?";
             $params[] = "%" . $data[1] . "%";
         }
 
         if (!empty($data[2])) {
-            $where_clauses[] = "status = ?"; // Status exato, não LIKE
-            $params[] = $data[2];
+            if($data[2] == "in-stock"){
+                $where_clauses[] = "quantidade > 10"; // Status exato, não LIKE
+            }else if($data[2] == "low-stock"){
+                $where_clauses[] = "quantidade < 10"; // Status exato, não LIKE
+            }else if($data[2] == "out-of-stock"){
+                $where_clauses[] = "quantidade = 0"; // Status exato, não LIKE
+            }
         }
 
         if (!empty($where_clauses)) {
@@ -114,11 +119,95 @@ class ModelDashboard
         
         $query .= " ORDER BY nome ASC";
 
-     
+        //echo $query;
         $sql = Mysql::connect()->prepare($query);
         $sql->execute($params);
-        return $sql->fetchAll(PDO::FETCH_ASSOC);
+        $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+    
+
+        return (!empty($resultado)?$resultado:[]);
     }   
     /*---------------Relatorios de Produtos--------------------*/
+
+
+    /*---------------Relatorios de Clientes--------------------*/
+    public static function relatorioClientes($data)
+    {
+        $query = "SELECT * FROM `tb.clientes`";
+        $params = [];
+        $where_clauses = [];
+        if (!empty($data[0])) {
+            $where_clauses[] = "nome LIKE ?";
+            $params[] = "%" . $data[0] . "%";
+        }
+        
+        if (!empty($data[1])) {
+            $where_clauses[] = "cpf_cnpj LIKE ?";
+            $params[] = "%" . $data[1] . "%";
+        }
+
+        if (!empty($data[2])) {
+           $where_clauses[] = "cidade LIKE ?";
+            $params[] = "%" . $data[2] . "%";
+        }
+
+        if (!empty($data[3])) {
+           $where_clauses[] = "estado LIKE ?";
+            $params[] = "%" . $data[2] . "%";
+        }
+
+        if (!empty($where_clauses)) {
+            $query .= " WHERE " . implode(" AND ", $where_clauses);
+        }
+        
+        $query .= " ORDER BY nome ASC";
+
+        //echo $query;
+        $sql = Mysql::connect()->prepare($query);
+        $sql->execute($params);
+        $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+    
+
+        return (!empty($resultado)?$resultado:[]);
+    } 
+    /*---------------Relatorios de Clientes--------------------*/
+
+    /*---------------Relatorios de Funcionarios--------------------*/
+    public static function relatorioFuncionarios($data)    {
+        $query = "SELECT * FROM `tb.funcionarios`";
+        $params = [];
+        $where_clauses = [];
+        if (!empty($data[0])) {
+            $where_clauses[] = "nome LIKE ?";
+            $params[] = "%" . $data[0] . "%";
+        }
+        
+        if (!empty($data[1])) {
+            $where_clauses[] = "cpf LIKE ?";
+            $params[] = "%" . $data[1] . "%";
+        }
+
+        if (!empty($data[2])) {
+           $where_clauses[] = "cargo LIKE ?";
+            $params[] = "%" . $data[2] . "%";
+        }
+
+        if (!empty($where_clauses)) {
+            $query .= " WHERE " . implode(" AND ", $where_clauses);
+        }
+        
+        $query .= " ORDER BY nome ASC";
+
+        //echo $query;
+        $sql = Mysql::connect()->prepare($query);
+        $sql->execute($params);
+        $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+    
+
+        return (!empty($resultado)?$resultado:[]);
+    } 
+    /*---------------Relatorios de Funcionarios--------------------*/
 }
+
+
 ?>

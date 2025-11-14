@@ -13,9 +13,10 @@ class DashboardController
         }
 
         //limpar mensagens de feedback
-        if (isset($_SESSION["erro"]) || isset($_SESSION["feedback"])) {
+        if (isset($_SESSION["erro"]) || isset($_SESSION["feedback"]) || isset($_SESSION["relatorio"])) {
             unset($_SESSION["erro"]);
             unset($_SESSION["feedback"]);
+            unset($_SESSION["relatorio"]);
             //if ((time() - $_SESSION["last_time"]) > 2) {}
         }
     }
@@ -238,6 +239,7 @@ class DashboardController
             $cpf = preg_replace("/[^0-9]/", "", $_POST["cpf"] ?? "");
             $email = self::sanitizeString($_POST["email"] ?? "");
             $cargo = $_POST["cargo"];
+            $admissao = date('Y-m-d');
             $telefone = preg_replace("/[^0-9]/", "", $_POST["telefone"] ?? "");
             $nascimento = $_POST["nascimento"];
             $senha = $_POST["senha"];
@@ -285,7 +287,7 @@ class DashboardController
             if (!empty($_SESSION["erro"])) {
                
             } else {
-                $data = array(null, $nome, $cpf, $email, $cargo, $telefone, $nascimento, $senha);
+                $data = array(null, $nome, $cpf, $email, $cargo, $admissao, $telefone, $nascimento, $senha);
                 if (ModelDashboard::cadastrarFuncionario($data)) {
                     $_SESSION["feedback"] = "Cadastrado com Sucesso";
                    
@@ -314,9 +316,42 @@ class DashboardController
             $categoria = $_POST["categoria"];
             $status = $_POST["status"];
             $data = array( $nome, $categoria, $status);
-             $_SESSION["relatorio"] = ModelDashboard::relatorioProdutos($data);
+            $_SESSION["relatorio"] = ModelDashboard::relatorioProdutos($data);
 
             header("Location: " . RELATIVE_PATH . "/dashboard/relatorio/produto");
+            exit();
+            
+        }
+    }
+
+    public static function relatorioClientes(){
+        if($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            $nome = $_POST["nome"];
+            $cpf_cnpj = $_POST["cpf_cnpj"];
+            $estado = $_POST["estado"];
+            $cidade = $_POST["cidade"];
+            $data = array( $nome, $cpf_cnpj, $cidade, $estado);
+            $_SESSION["relatorio"] = ModelDashboard::relatorioClientes($data);
+
+            header("Location: " . RELATIVE_PATH . "/dashboard/relatorio/cliente");
+            exit();
+            
+        }
+    }
+
+
+    public static function relatorioFuncionarios(){
+        if($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            $nome = $_POST["nome"];
+            $cpf = $_POST["cpf"];
+            $cargo = $_POST["cargo"];
+            
+            $data = array( $nome, $cpf, $cargo);
+            $_SESSION["relatorio"] = ModelDashboard::relatorioFuncionarios($data);
+
+            header("Location: " . RELATIVE_PATH . "/dashboard/relatorio/colaborador");
             exit();
             
         }

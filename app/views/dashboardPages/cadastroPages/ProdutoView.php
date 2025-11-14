@@ -18,6 +18,12 @@
         </div>
 
         <div class="form-group">
+            <label for="categoria">Categoria</label>
+            <input type="text" id="categoria" name="categoria" rows="4"
+                placeholder="Categoria do produto." required/>
+        </div>
+
+        <div class="form-group">
             <label for="descricao">Descrição Detalhada</label>
             <textarea id="descricao" name="descricao" rows="4"
                 placeholder="Detalhes técnicos, materiais e benefícios do produto..." required></textarea>
