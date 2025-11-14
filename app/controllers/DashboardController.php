@@ -5,22 +5,22 @@ class DashboardController
 
     public function main()
     {
-        if (isset($_SESSION["erro"]) || isset($_SESSION["feedback"])) {
-            if ((time() - $_SESSION["last_time"]) > 3) {
-                unset($_SESSION["erro"]);
-                unset($_SESSION["feedback"]);
-                unset($_SESSION["last_time"]);
-            }
-        }
 
         if (isset($_SESSION["login"])) {
             require_once ROOT_PATH . "/app/views/DashboardView.php";
         } else {
             require_once ROOT_PATH . "/app/views/LoginView.php";
         }
+
+        //limpar mensagens de feedback
+        if (isset($_SESSION["erro"]) || isset($_SESSION["feedback"])) {
+            unset($_SESSION["erro"]);
+            unset($_SESSION["feedback"]);
+            //if ((time() - $_SESSION["last_time"]) > 2) {}
+        }
     }
 
-    /* Login */
+    /* --------- Login/Logout  ------------*/
     public function login()
     {
         if (isset($_POST["login"])) {
@@ -33,14 +33,12 @@ class DashboardController
                 $_SESSION["login"] = true;
                 if (isset($_SESSION["erro"]) || isset($_SESSION["feedback"])) {
                     unset($_SESSION["erro"]);
-                    unset($_SESSION["feedback"]);
-                    unset($_SESSION["last_time"]);
+                    unset($_SESSION["feedback"]);    
                 }
                 header("Location:" . RELATIVE_PATH . "/dashboard/");
                 exit();
             } else {
                 $_SESSION["erro"] = true;
-                $_SESSION["last_time"] = time();
                 header("Location: " . RELATIVE_PATH . "/dashboard/");
                 exit();
             }
@@ -56,6 +54,8 @@ class DashboardController
         header("Location: " . RELATIVE_PATH . "/dashboard/");
         exit();
     }
+    /* --------- Login/Logout  ------------*/
+
 
     /*-------------------Cadastro----------------------- */
 
@@ -65,6 +65,7 @@ class DashboardController
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $nome = $_POST["nome"];
             $valor = $_POST["valor"];
+            $quantidade = $_POST["quantidade"];
             $descricao = $_POST["descricao"];
             $img = $_FILES["imagem"];
             $arquivo_temporario = "";
@@ -74,12 +75,19 @@ class DashboardController
             $novo_nome = "";
             $caminho_completo_destino = "";
 
+            if (ModelDashboard::consultarProduto((array($nome)))) {
+                $_SESSION["erro"] = "Produto já cadastrado";
+            }
 
-            if (empty($nome) || strlen($nome) < 4) {
+            if (empty($nome) || strlen($nome) < 2) {
                 $_SESSION["erro"] = "Campo de nome vazio ou invalido";
             }
 
             if (empty($valor) || $valor == 0) {
+                $_SESSION["erro"] = "Valor não pode está vazio ou ser igual a zero";
+            }
+
+            if (empty($quantidade) || $valor == 0) {
                 $_SESSION["erro"] = "Valor não pode está vazio ou ser igual a zero";
             }
 
@@ -91,34 +99,33 @@ class DashboardController
 
                 $extensao = strtolower(pathinfo($nome_original, PATHINFO_EXTENSION));
                 $novo_nome = uniqid() . "." . $extensao;
-
-                $caminho_completo_destino = $diretorio_destino . $novo_nome;
+                $nome_original = "assets/images/produtos/" .$nome ."/".$novo_nome;
+                $caminho_completo_destino = $diretorio_destino;
 
             } else {
-                echo "Nenhum arquivo enviado.";
+                //echo "Nenhum arquivo enviado.";
             }
 
             if (empty($_SESSION["erro"])) {
-                $data = array(null, $nome, $valor, $descricao, $nome_original);
+                $data = array(null, $nome, $valor, $quantidade, $descricao, $nome_original);
                 if (ModelDashboard::cadastrarProtudo($data)) {
-                    if (!is_dir($diretorio_destino . "/" . $nome)) {
-                        mkdir($diretorio_destino . "/" . $nome, 0777, TRUE);
-                    }
+                    if (!empty($img)) {
+                        if (!is_dir($caminho_completo_destino."/".$nome)) {
+                            mkdir($caminho_completo_destino."/".$nome, 0777, true);
+                        }
 
-                    if (move_uploaded_file($arquivo_temporario, $caminho_completo_destino)) {
-                        echo "Arquivo enviado com sucesso para: " . $caminho_completo_destino;
-                    } else {
-                        echo "Erro ao mover o arquivo.";
+                        if (move_uploaded_file($arquivo_temporario,  $caminho_completo_destino."/".$nome ."/".$novo_nome )) {
+                            $_SESSION["feedback"] = "Arquivo enviado com sucesso para: " . $caminho_completo_destino;
+                        } else {
+                            $_SESSION["erro"] = "Erro ao mover o arquivo.";
+                        }
                     }
-                    
                     $_SESSION["feedback"] = "Cadastrado com Sucesso";
-                    $_SESSION["last_time"] = time();
                 } else {
                     $_SESSION["erro"] = "não foi possivel salvar no banco de dados";
-                    $_SESSION["last_time"] = time();
                 }
 
-            }
+            } 
 
             header("Location: " . RELATIVE_PATH . "/dashboard/cadastro/produto");
             exit();
@@ -203,15 +210,15 @@ class DashboardController
             /*--------verificação endereco-----------*/
 
             if (!empty($_SESSION["erro"])) {
-                $_SESSION["last_time"] = time();
+               
             } else {
                 $data = array(null, $nome, $telefone, $cpf_cnpj, $rg_inscricaoEstadual, $nascimento, $cep, $endereco, $numero, $bairro, $cidade, $estado);
                 if (ModelDashboard::cadastrarCliente($data)) {
                     $_SESSION["feedback"] = "Cadastrado com Sucesso";
-                    $_SESSION["last_time"] = time();
+                   
                 } else {
                     $_SESSION["erro"] = "não foi possivel salvar no banco de dados";
-                    $_SESSION["last_time"] = time();
+                   
                 }
             }
 
@@ -276,15 +283,15 @@ class DashboardController
             }
 
             if (!empty($_SESSION["erro"])) {
-                $_SESSION["last_time"] = time();
+               
             } else {
                 $data = array(null, $nome, $cpf, $email, $cargo, $telefone, $nascimento, $senha);
                 if (ModelDashboard::cadastrarFuncionario($data)) {
                     $_SESSION["feedback"] = "Cadastrado com Sucesso";
-                    $_SESSION["last_time"] = time();
+                   
                 } else {
                     $_SESSION["erro"] = "não foi possivel salvar no banco de dados";
-                    $_SESSION["last_time"] = time();
+                   
                 }
             }
 
@@ -296,6 +303,25 @@ class DashboardController
     /*----------Funcionario------------ */
 
     /*-------------------Cadastro----------------------- */
+
+
+
+    /*--------------------Relatorios----------------------*/
+    public static function relatorioProdutos(){
+        if($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            $nome = $_POST["nome"];
+            $categoria = $_POST["categoria"];
+            $status = $_POST["status"];
+            $data = array( $nome, $categoria, $status);
+             $_SESSION["relatorio"] = ModelDashboard::relatorioProdutos($data);
+
+            header("Location: " . RELATIVE_PATH . "/dashboard/relatorio/produto");
+            exit();
+            
+        }
+    }
+    /*--------------------Relatorios----------------------*/
 }
 
 

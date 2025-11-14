@@ -12,10 +12,16 @@
         </div>
 
         <div class="form-group">
+            <label for="quantidade">Quantidade</label>
+            <input type="number" id="quantidade" name="quantidade" rows="4"
+                placeholder="Quantidade do produto para estoque..." required/>
+        </div>
+
+        <div class="form-group">
             <label for="descricao">Descrição Detalhada</label>
             <textarea id="descricao" name="descricao" rows="4"
                 placeholder="Detalhes técnicos, materiais e benefícios do produto..." required></textarea>
-        </div>
+        </div>        
 
         <div class="form-group">
             <label>Imagem do Produto</label>
