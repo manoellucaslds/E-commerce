@@ -47,6 +47,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nome do Colaborador</th>
+                    <th>CPF</th>
                     <th>Cargo</th>
                     <th>E-mail</th>
                     <th>Admissão</th>
@@ -60,12 +61,17 @@
                 //echo (!empty($_SESSION["relatorio"]) ? print_r($_SESSION["relatorio"]) : "teste");
                 if (!empty($_SESSION["relatorio"])) {
                     foreach ($_SESSION["relatorio"] as $key => $value) {
-                    
+                        $cpf = $value["cpf"];
+                        if (strlen($cpf) === 11) {
+                            // Formata CPF: XXX.XXX.XXX-XX
+                           $cpf =   preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $cpf);
+                        } 
 
                         echo '
                                 <tr>
                                      <td data-label="ID">'.$value["id"].'</td>
                                     <td data-label="Nome">'.$value["nome"].'</td>
+                                    <td data-label="Nome">'.$cpf .'</td>
                                     <td data-label="Cargo"><span class="role">'.$value["cargo"].'</span></td>
                                     <td data-label="E-mail">'.$value["email"].'</td>
                                     <td data-label="Admissão">'.$value["admissao"].'</td>
